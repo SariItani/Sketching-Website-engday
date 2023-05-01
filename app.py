@@ -23,6 +23,8 @@ def upload():
     file_base64 : str = request.form['file'] 
     # Save the uploaded sketch as an image file
     img = decode_img(file_base64)
+    print(img)
+    print(type(img))
     img.save('input.png')
     # Call the NVIDIA Canvas app to generate the sketch
     subprocess.call(['cat', 'input.png'])
