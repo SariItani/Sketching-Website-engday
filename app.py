@@ -1,32 +1,25 @@
 from flask import Flask, request, render_template
-import requests
-import base64
-import socket
-
-midjourney_api_url = 'https://api.midjourney.com/sketch'
+import subprocess
+from PIL import Image
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
-def upload_file():
-    if request.method == 'POST':
-        file = request.files['file']
-        # do something with the file
-        # Encode the file as Base64
-        encoded_file = base64.b64encode(file.read()).decode('utf-8')
-        # Send the file to the midjourney API
-        response = requests.post(midjourney_api_url, json={'image': encoded_file})
-        # Extract the sketch image from the response
-        sketch_image = response.json()['sketch']
-        # Render the sketch image in the browser
-        return f'<img src="data:image/png;base64,{sketch_image}">'
-    else:
-        return render_template('index.html')
+@app.route('/')
+def index():
+    return render_template('index.html')
 
+@app.route('/upload', methods=['POST'])
+def upload():
+    file = request.files['sketch']
+    # Save the uploaded sketch as an image file
+    img = Image.open(file.stream)
+    img.save('input.png')
+    # Call the NVIDIA Canvas app to generate the sketch
+    subprocess.call(['path/to/nvidia-canvas', 'input.png', 'output.png'])
+    # Load the generated sketch from the server and display it on the web page
+    with open('output.png', 'rb') as f:
+        data = f.read()
+    return data
 
 if __name__ == '__main__':
-    # Get the IP address of the machine
-    hostname = socket.gethostname()
-    addr_info = socket.getaddrinfo(hostname, None)[0]
-    ip_address = addr_info[4][0]
-    app.run(debug=True, host=ip_address, port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5000)
