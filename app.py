@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template
 import requests
 import base64
+import socket
 
 midjourney_api_url = 'https://api.midjourney.com/sketch'
 
@@ -24,4 +25,5 @@ def upload_file():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    ip_address = socket.gethostbyname(socket.gethostname())
+    app.run(debug=True, host=ip_address, port=5000)
