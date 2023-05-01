@@ -25,5 +25,8 @@ def upload_file():
 
 
 if __name__ == '__main__':
-    ip_address = socket.gethostbyname(socket.gethostname())
+    # Get the IP address of the machine
+    hostname = socket.gethostname()
+    addr_info = socket.getaddrinfo(hostname, None)[0]
+    ip_address = addr_info[4][0]
     app.run(debug=True, host=ip_address, port=5000)
