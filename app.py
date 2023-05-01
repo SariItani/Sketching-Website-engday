@@ -10,7 +10,7 @@ def index():
 
 @app.route('/upload', methods=['POST'])
 def upload():
-    file = request.files['sketch']
+    file = request.files['file']
     # Save the uploaded sketch as an image file
     img = Image.open(file.stream)
     img.save('input.png')
