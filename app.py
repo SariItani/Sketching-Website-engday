@@ -8,14 +8,15 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/upload', methods=['POST'])
+@app.route('/upload_canvas', methods=['POST'])
 def upload():
     file = request.files['file']
     # Save the uploaded sketch as an image file
     img = Image.open(file.stream)
     img.save('input.png')
     # Call the NVIDIA Canvas app to generate the sketch
-    subprocess.call(['path/to/nvidia-canvas', 'input.png', 'output.png'])
+    subprocess.call(['cat', 'input.png'])
+    # subprocess.call(['path/to/nvidia-canvas', 'input.png', 'output.png'])
     # Load the generated sketch from the server and display it on the web page
     with open('output.png', 'rb') as f:
         data = f.read()

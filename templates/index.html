@@ -163,11 +163,19 @@
   function download() {
     var link = document.createElement("a");
     var dataURL = canvas.toDataURL();
-    link.href = dataURL;
-    link.download = "mydrawing.png";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+ //   link.href = dataURL;
+ //   link.download = "mydrawing.png";
+ //   document.body.appendChild(link);
+ //   link.click();
+ //   document.body.removeChild(link);
+
+    $.ajax({
+      type: "POST",
+      url: "/upload_canvas",
+      data: {
+        imgBase64: dataURL
+      }
+    });
   }
 
   function findxy(res, e, source) {
@@ -242,11 +250,13 @@
         </div>
       </div>
     </div>
-
+    <form method="POST" enctype="multipart/form-data">
     <div class="buttons">
-      <input type="button" value="Download" name='file' id="download" size="23" onclick="download()" class="btn btn-primary" />
+      <input type = 'file' name='file'/>
+      <input type="button" value="Download" id="download" size="23" onclick="download()" class="btn btn-primary" />
       <input type="button" value="clear" id="clr" size="23" onclick="erase()" class="btn btn-light" />
     </div>
+  </form>
   </div>
   </div>
 </body>
