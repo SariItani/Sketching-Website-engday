@@ -1,6 +1,16 @@
+import base64
+import io
 from flask import Flask, request, render_template
 import subprocess
 from PIL import Image
+
+def decode_img(msg):
+    # msg = msg[msg.find(b"<plain_txt_msg:img>")+len(b"<plain_txt_msg:img>"):
+            # msg.find(b"<!plain_txt_msg>")]
+    msg = base64.b64decode(msg)
+    buf = io.BytesIO(msg)
+    img = Image.open(buf)
+    return img
 
 app = Flask(__name__)
 
@@ -10,9 +20,9 @@ def index():
 
 @app.route('/upload_canvas', methods=['POST'])
 def upload():
-    file = request.files['file']
+    file_base64 : str = request.form['file'] 
     # Save the uploaded sketch as an image file
-    img = Image.open(file.stream)
+    img = decode_img(file_base64)
     img.save('input.png')
     # Call the NVIDIA Canvas app to generate the sketch
     subprocess.call(['cat', 'input.png'])
