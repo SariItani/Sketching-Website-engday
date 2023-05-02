@@ -3,6 +3,7 @@ import io
 from flask import Flask, request, render_template
 import subprocess
 from PIL import Image
+# import positionGetter
 
 def decode_img(msg):
     # msg = msg[msg.find(b"<plain_txt_msg:img>")+len(b"<plain_txt_msg:img>"):
@@ -16,6 +17,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+    # print(positionGetter.getPos())
     return render_template('index.html')
 
 @app.route('/upload_canvas', methods=['POST'])
