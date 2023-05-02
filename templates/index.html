@@ -22,38 +22,45 @@
       box-shadow: 0px 0px 8px grey;
     }
 
-    .row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: row;
-    }
 
-    .buttons {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: row;
+    .buttons>input:nth-child(1) {
+      margin-right: 1rem;
     }
 
     .buttons>input {
-      margin-inline: 3rem;
-      margin-block: 1rem
+      margin-top: 2rem;
     }
 
     canvas {
       border: 5px solid;
       display: block;
+      width: 565px;
+      height: 560px;
+    }
+
+    .colors {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 2rem 2rem 2rem 2rem;
+      grid-template-rows: auto auto auto auto;
+    }
+
+    .options {
+      display: block;
+      width: 100%
+    }
+
+    #app {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+      column-gap: 4rem;
     }
   </style>
 </head>
 <script type="text/javascript">
-
-
-
-  var canvas,
-    ctx,
-    flag = false,
+  var canvas, ctx, flag = false,
     prevX = 0,
     currX = 0,
     prevY = 0,
@@ -63,72 +70,37 @@
   var x = "black",
     y = 2;
 
-  function resize_canvas() {
-    canvas = document.getElementById("can");
-    if (canvas.width < window.innerWidth) {
-      canvas.width = window.innerWidth;
-    }
-    canvas.height = 768/2;
-    canvas.width = 1366/2
-  }
-
-
   function init() {
-    canvas = document.getElementById("can");
+    canvas = document.getElementById('can');
     ctx = canvas.getContext("2d");
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
     w = canvas.width;
     h = canvas.height;
 
-    canvas.addEventListener(
-      "mousemove",
-      function (e) {
-        findxy("move", e, "");
-      },
-      false
-    );
-    canvas.addEventListener(
-      "mousedown",
-      function (e) {
-        findxy("down", e, "");
-      },
-      false
-    );
-    canvas.addEventListener(
-      "mouseup",
-      function (e) {
-        findxy("up", e, "");
-      },
-      false
-    );
-    canvas.addEventListener(
-      "mouseout",
-      function (e) {
-        findxy("out", e, "");
-      },
-      false
-    );
+    canvas.addEventListener("mousemove", function (e) {
+      findxy('move', e, '')
+    }, false);
+    canvas.addEventListener("mousedown", function (e) {
+      findxy('down', e, '')
+    }, false);
+    canvas.addEventListener("mouseup", function (e) {
+      findxy('up', e, '')
+    }, false);
+    canvas.addEventListener("mouseout", function (e) {
+      findxy('out', e, '')
+    }, false);
 
-    canvas.addEventListener(
-      "touchmove",
-      function (e) {
-        findxy("move", e, "touch");
-      },
-      false
-    );
-    canvas.addEventListener(
-      "touchstart",
-      function (e) {
-        findxy("down", e, "touch");
-      },
-      false
-    );
-    canvas.addEventListener(
-      "touchend",
-      function (e) {
-        findxy("up", e, "touch");
-      },
-      false
-    );
+    canvas.addEventListener("touchmove", function (e) {
+      findxy('move', e, 'touch')
+    }, false);
+    canvas.addEventListener("touchstart", function (e) {
+      findxy('down', e, 'touch')
+    }, false);
+    canvas.addEventListener("touchend", function (e) {
+      findxy('up', e, 'touch')
+    }, false);
+
   }
 
   function color(obj) {
@@ -140,6 +112,7 @@
     if (prevSelected.length > 0) {
       prevSelected[0].classList.remove("selected");
     }
+
     document.getElementById(obj.id).classList.add("selected");
   }
 
@@ -155,23 +128,10 @@
 
   function erase() {
     ctx.clearRect(0, 0, w, h);
-    var w = canvas.width;
-    canvas.width = 1;
-    canvas.width = w;
+    document.getElementById("canvasimg").style.display = "none";
   }
 
 
-  function download() {
-    console.log("Download button clicked!");
-    var link = document.createElement("a");
-    var dataURL = canvas.toDataURL();
-  //  link.href = dataURL;
-  //  link.download = "mydrawing.png";
-  //  document.body.appendChild(link);
-  //  link.click();
-  //  document.body.removeChild(link);
-  
-  }
 
   function findxy(res, e, source) {
     if (source) {
@@ -182,7 +142,7 @@
       var clientY = e.clientY;
     }
 
-    if (res == "down") {
+    if (res == 'down') {
       prevX = currX;
       prevY = currY;
       currX = clientX - canvas.getBoundingClientRect().left;
@@ -199,11 +159,11 @@
       }
     }
 
-    if (res == "up" || res == "out") {
+    if (res == 'up' || res == "out") {
       flag = false;
     }
 
-    if (res == "move") {
+    if (res == 'move') {
       if (flag) {
         prevX = currX;
         prevY = currY;
@@ -213,44 +173,33 @@
       }
     }
   }
+
+
 </script>
 
-<body onload="init();resize_canvas()" onresize="resize_canvas()">
-  <canvas id="can"></canvas>
-  <div style="margin-left: 20px; display:block">
-    <div class="row">
-      <div class="col-12">Choose Color</div>
-      <div class="col-2 pt-3">
-        <div class="select-colour" style="background: green" id="green" onclick="color(this)"></div>
-      </div>
-      <div class="col-2 pt-3">
+<body onload="init()">
+  <div id="app" style="height: 100%;">
+    <canvas id="can"
+      onresize="() => {canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight    }"></canvas>
+    <div class="options">
+      <div class="menu-header">Materials</div>
+      <div class="colors">
+        <div class="select-colour" title="" style="background: #61edf4" id="green" onclick="color(this)"></div>
         <div class="select-colour" style="background: blue" id="blue" onclick="color(this)"></div>
-      </div>
-      <div class="col-2 pt-3">
         <div class="select-colour" style="background: red" id="red" onclick="color(this)"></div>
-      </div>
-      <div class="col-2 pt-3">
         <div class="select-colour" style="background: yellow" id="yellow" onclick="color(this)"></div>
-      </div>
-      <div class="col-2 pt-3">
         <div class="select-colour" style="background: orange" id="orange" onclick="color(this)"></div>
-      </div>
-      <div class="col-2 pt-3">
         <div class="select-colour" style="background: black" id="black" onclick="color(this)"></div>
-      </div>
-      <div class="col-12 pt-3 pb-3">Eraser</div>
 
-      <div class="col-12 pt-3 pb-3">
-        <div class="select-colour" style="background: white; border: 2px solid" id="white" onclick="color(this)">
-        </div>
+      </div>
+      <div>Eraser</div>
+      <div class="select-colour" style="background: white; border: 2px solid" id="white" onclick="color(this)"></div>
+      <div class="buttons">
+        <input type="button" class="btn btn-primary" value="Submit" id="download" size="23" onclick="download()"
+          class="" />
+        <input type="button" class="btn btn-light" value="Clear" id="clr" size="23" onclick="erase()" class="" />
       </div>
     </div>
-
-    <div class="buttons">
-      <input type="button" value="Submit" id="download" size="23" onclick="download()" class="btn btn-primary" />
-      <input type="button" value="clear" id="clr" size="23" onclick="erase()" class="btn btn-light" />
-    </div>
-  </div>
   </div>
 </body>
 
