@@ -1,8 +1,9 @@
 from time import sleep
 import pyautogui
+from math import sqrt
 
 screenWidth, screenHeight = pyautogui.size() # Get the size of the primary monitor.
-print(screenWidth, screenHeight)
+# print(screenWidth, screenHeight)
 
 
 # while(1):
@@ -12,12 +13,48 @@ def getPos():
     return pyautogui.position()
 
 VALUES = [
-    (121, 231, 245, 0), (97, 126, 123, 0), (59, 222, 138, 0), (138, 122, 92, 0), (172, 194, 254, 0), (147, 53, 13, 0), (74, 198, 178, 0), (135, 216, 255, 0), (131, 206, 207, 0), (141, 171, 251, 0), (134, 0, 142, 0), (70, 202, 0, 0), (125, 231, 99, 0), (88, 115, 43, 0), (144, 212, 50, 0), (161, 83, 52 ,0), (152, 148, 0 ,0), (131, 84, 84, 0), (117, 74, 26, 0), (171, 174, 119, 0)
+    (121, 231, 245, 1), (97, 126, 123, 0), (59, 222, 138, 0), (138, 122, 92, 0), (172, 194, 254, 0), (147, 53, 13, 0), (74, 198, 178, 0), (135, 216, 255, 0), (131, 206, 207, 0), (141, 171, 251, 0), (134, 0, 142, 0), (70, 202, 0, 0), (125, 231, 99, 0), (88, 115, 43, 0), (144, 212, 50, 0), (161, 83, 52 ,0), (152, 148, 0 ,0), (131, 84, 84, 0), (117, 74, 26, 0), (171, 174, 119, 0)
 ]
 MATERIALS = [
     "Sky", "Cloud", "Hill", "Mountain", "Water", "Mud", "Fog", "Snow", "Sea", "River", "Flower", "Grass", "Straw", "Bush", "Forest", "Stone", "Sand", "Gravel", "Dirt", "Stone Wall"
 ]
-# def distance(rbgba):
+pixel_to_pos = {}
+for i, color in enumerate(VALUES):
+    # color (rbga) at index i will point to position (x, y) at position i
+    pixel_to_pos[color] = MATERIALS[i]
+print(*pixel_to_pos(color))
+# if i give a function an RBGA tuple (r, g, b, a), 
+# it will iterate over VALUES by i:
+# find di = sqrt( sum ( ( tulpe[component] - VALUE[i][component] ) **2 ) )
+# we add di to a list of distances by index i
+# we get the shortest distance's index: i represents the the index of the correct VALUES color
+# we return VALUES[i]
+def color_picker(color:tuple):
+    distances = []
+    for i in range(len(VALUES) - 1):
+        sum = 0
+        for component in range(len(color) - 1):
+            sum += (color[component] - VALUES[i][component])**2
+        distances.append(sqrt(sum))
+    # now that i have the distances i have to pick the index of the minimum element
+    min_distance = min(distances)
+    min_index = distances.index(min_distance)
+    return VALUES[min_index]
+
+input  = (131, 156, 138, 3)
+print(color_picker(input))
+print(pixel_to_pos[color_picker(input)])
+
+
+
+
+# # we need a new controling function that gives us the pixel at which we need to draw next:
+# for i, color in enumerate(colors):
+#     # calculate the coordinates of the pixel in the canvas
+#     x = (i % canvas_width) + canvas_top_left[0] #
+#     y = (i // canvas_height) + canvas_top_left[1]
+
+
 
 
 # (1635, 170) (1700, 170) (1760, 170) (1825, 170) (1890, 170)
