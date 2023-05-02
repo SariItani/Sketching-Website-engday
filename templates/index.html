@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -255,24 +256,23 @@
         <div class="select-colour" title="Bush" style="background: rgb(88, 115, 43)" onclick="color(event)"></div>
         <div class="select-colour" title="Forest" style="background: rgb(144, 212, 50)" onclick="color(event)"></div>
         <div class="select-colour" title="Stone" style="background: rgb(161, 83, 52)" onclick="color(event)"></div>
-        <div class="select-colour" title="Sand" style="background: rgb(152, 148, 0)" onclick="color(event)">
-          <div class="select-colour" title="Gravel" style="background: rgb(131, 84, 84)" onclick="color(event)">
-            <div class="select-colour" title="Dirt" style="background: rgb(117, 74, 26)" onclick="color(event)">
-              <div class="select-colour" title="Stone wall" style="background: rgb(171, 174, 119)"
-                onclick="color(event)">
-              </div>
-            </div>
-            <div>Eraser</div>
-            <div class="select-colour" style="background: rgba(0, 0, 0, 0); border: 2px solid" id="white"
-              onclick="color(this)">
-            </div>
-            <div class="buttons">
-              <input type="button" class="btn btn-primary" value="Submit" id="download" size="23" onclick="download()"
-                class="" />
-              <input type="button" class="btn btn-light" value="Clear" id="clr" size="23" onclick="erase()" class="" />
-            </div>
-          </div>
+        <div class="select-colour" title="Sand" style="background: rgb(152, 148, 0)" onclick="color(event)"></div>
+        <div class="select-colour" title="Gravel" style="background: rgb(131, 84, 84)" onclick="color(event)"></div>
+        <div class="select-colour" title="Dirt" style="background: rgb(117, 74, 26)" onclick="color(event)"></div>
+        <div class="select-colour" title="Stone wall" style="background: rgb(171, 174, 119)" onclick="color(event)">
         </div>
+      </div>
+      <div>Eraser</div>
+      <div class="select-colour" style="background: rgba(0, 0, 0, 0); border: 2px solid" id="white"
+        onclick=" ctx.globalCompositeOperation = 'destination-out'; color(event) ">
+      </div>
+      <div class="buttons">
+        <input type="button" class="btn btn-primary" value="Submit" id="download" size="23" onclick="download()"
+          class="" />
+        <input type="button" class="btn btn-light" value="Clear" id="clr" size="23" onclick="erase()" class="" />
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
