@@ -54,6 +54,9 @@ def upload_canvas():
             color = pixels[x, y]
             colors.append(color)
 
+    # code
+    # ...
+
     # Get the size of the image
     width, height = image.size
     
