@@ -5,11 +5,19 @@ screenWidth, screenHeight = pyautogui.size() # Get the size of the primary monit
 print(screenWidth, screenHeight)
 
 
-while(1):
-    currentMouseX, currentMouseY = pyautogui.position() # Get the XY position of the mouse.
-    # print(currentMouseX, currentMouseY)
+# while(1):
+#     currentMouseX, currentMouseY = pyautogui.position() # Get the XY position of the mouse.
+#     # print(currentMouseX, currentMouseY)
 def getPos():
     return pyautogui.position()
+
+VALUES = [
+    (0, 0, 0, 0), (255, 255, 255, 0), (255, 0 , 0, 0), ()
+]
+MATERIALS = [
+    "sky", "cloud", "fog", "water", "hill", "mountain", "mud", "snow", "straw", "sea", "river", "flower", "bush", "grass", "forest", "dirt", "gravel", "sand", "stone", "stonewall"
+]
+def distance(rbgba):
 
 
 # (1635, 170) (1700, 170) (1760, 170) (1825, 170) (1890, 170)

@@ -26,6 +26,7 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+colors = []
 @app.route('/upload-canvas', methods=['POST'])
 def upload_canvas():
     dataURL = request.json['dataURL']
@@ -38,7 +39,6 @@ def upload_canvas():
     # Get the color of each pixel in the image
     image = Image.open('image.png')
     pixels = image.load()
-    colors = []
     for y in range(image.size[1]):
         for x in range(image.size[0]):
             color = pixels[x, y]
