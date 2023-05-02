@@ -56,6 +56,12 @@ def upload_canvas():
     new_image.save(output_buffer, format='PNG')
     image_data = output_buffer.getvalue()
 
+    # # debugging
+    # file_content = str(colors)
+    # file = open("pixels.txt", "w")
+    # file.write(file_content)
+    # file.close()
+
     return jsonify({'message': 'Image uploaded successfully!'})
 
 
