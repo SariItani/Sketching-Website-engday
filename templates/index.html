@@ -161,20 +161,15 @@
 
 
   function download() {
+    console.log("Download button clicked!");
     var link = document.createElement("a");
     var dataURL = canvas.toDataURL();
- //   link.href = dataURL;
- //   link.download = "mydrawing.png";
- //   document.body.appendChild(link);
- //   link.click();
- //   document.body.removeChild(link);
-    $.ajax({
-      type: "POST",
-      url: "/upload_canvas",
-      data: {
-        file: dataURL
-      }
-    });
+  //  link.href = dataURL;
+  //  link.download = "mydrawing.png";
+  //  document.body.appendChild(link);
+  //  link.click();
+  //  document.body.removeChild(link);
+  
   }
 
   function findxy(res, e, source) {
