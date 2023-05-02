@@ -6,6 +6,8 @@ from PIL import Image
 
 # def getMousePosition():
 #     return pyautogui.position()
+colors = []
+pixel_to_pos = {}
 
 app = Flask(__name__)
 
