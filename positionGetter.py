@@ -2,7 +2,7 @@ from time import sleep
 import pyautogui
 
 screenWidth, screenHeight = pyautogui.size() # Get the size of the primary monitor.
-print(screenWidth, screenHeight)
+# print(screenWidth, screenHeight)
 
 
 # while(1):
@@ -17,7 +17,11 @@ VALUES = [
 MATERIALS = [
     "Sky", "Cloud", "Hill", "Mountain", "Water", "Mud", "Fog", "Snow", "Sea", "River", "Flower", "Grass", "Straw", "Bush", "Forest", "Stone", "Sand", "Gravel", "Dirt", "Stone Wall"
 ]
-# def distance(rbgba):
+
+
+# if i give a function an RBGA tuple (r, g, b, a), 
+# it will iterate over VALUES by i:
+# find di = sqrt( sum ( ( tulpe[component] - VALUE[i][component] ) **2 ) )
 
 
 # (1635, 170) (1700, 170) (1760, 170) (1825, 170) (1890, 170)
