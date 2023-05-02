@@ -30,9 +30,7 @@ def upload_canvas():
         for x in range(image.size[0]):
             color = pixels[x, y]
             colors.append(color)
-
-    # colors is now a 1-dimensional array of colors, where each color is a tuple of (R, G, B, A) values
-
+            
     # Get the size of the image
     width, height = image.size
     
@@ -46,7 +44,6 @@ def upload_canvas():
     image_data = output_buffer.getvalue()
 
     return jsonify({'message': 'Image uploaded successfully!'})
-
 
 
 if __name__ == '__main__':
