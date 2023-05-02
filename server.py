@@ -19,7 +19,7 @@ pixel_to_pos = {}
 for i, color in enumerate(COLORS):
     # color (rbga) at index i will point to position (x, y) at position i
     pixel_to_pos[color] = MATERIALS[i]
-print(pixel_to_pos)
+# print(pixel_to_pos)
 
 
 app = Flask(__name__)
