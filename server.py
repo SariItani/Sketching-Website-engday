@@ -57,6 +57,7 @@ def upload_canvas():
     # code
     # ...
 
+
     # Get the size of the image
     width, height = image.size
     
