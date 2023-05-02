@@ -29,10 +29,6 @@ def color_picker(color:tuple):
     min_index = distances.index(min_distance)
     return COLORS[min_index]
 
-input  = (131, 156, 138, 3)
-print(color_picker(input))
-print(pixel_to_pos[color_picker(input)])
-
 
 app = Flask(__name__)
 
