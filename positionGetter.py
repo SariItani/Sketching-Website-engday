@@ -46,6 +46,17 @@ print(color_picker(input))
 print(pixel_to_pos[color_picker(input)])
 
 
+
+
+# # we need a new controling function that gives us the pixel at which we need to draw next:
+# for i, color in enumerate(colors):
+#     # calculate the coordinates of the pixel in the canvas
+#     x = (i % canvas_width) + canvas_top_left[0] #
+#     y = (i // canvas_height) + canvas_top_left[1]
+
+
+
+
 # (1635, 170) (1700, 170) (1760, 170) (1825, 170) (1890, 170)
 # (1635, 230) (1700, 230) (1760, 230) (1825, 230) (1890, 230)
 # (1635, 290) (1700, 290) (1760, 290) (1825, 290) (1890, 290)

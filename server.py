@@ -6,6 +6,11 @@ from PIL import Image
 from math import sqrt
 
 
+canvas_top_left = (155, 155)
+canvas_bottom_right = (720, 715)
+canvas_width = canvas_bottom_right[0] - canvas_top_left[0] + 1
+canvas_height = canvas_bottom_right[1] - canvas_top_left[1] + 1
+
 COLORS = [
     (121, 231, 245, 0), (97, 126, 123, 0), (59, 222, 138, 0), (138, 122, 92, 0), (172, 194, 254, 0), (147, 53, 13, 0), (74, 198, 178, 0), (135, 216, 255, 0), (131, 206, 207, 0), (141, 171, 251, 0), (134, 0, 142, 0), (70, 202, 0, 0), (125, 231, 99, 0), (88, 115, 43, 0), (144, 212, 50, 0), (161, 83, 52 ,0), (152, 148, 0 ,0), (131, 84, 84, 0), (117, 74, 26, 0), (171, 174, 119, 0)
 ]
@@ -53,10 +58,17 @@ def upload_canvas():
         for x in range(image.size[0]):
             color = pixels[x, y]
             colors.append(color)
+    for i in range(len(colors) - 1):
+        colors[i] = color_picker(colors[i])
+    # now i have the array of fixed colors
 
     # code
     # ...
-
+    for i, color in enumerate(colors):
+        x = (i % canvas_width) + canvas_top_left[0]
+        y = (i // canvas_width) + canvas_top_left[1]
+        pyautogui.click(*pixel_to_pos(color))
+        pyautogui.click(x, y)
 
     # Get the size of the image
     width, height = image.size
