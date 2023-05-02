@@ -12,12 +12,12 @@ def getPos():
     return pyautogui.position()
 
 VALUES = [
-    (0, 0, 0, 0), (255, 255, 255, 0), (255, 0 , 0, 0), ()
+    (121, 231, 245, 0), (97, 126, 123, 0), (59, 222, 138, 0), (138, 122, 92, 0), (172, 194, 254, 0), (147, 53, 13, 0), (74, 198, 178, 0), (135, 216, 255, 0), (131, 206, 207, 0), (141, 171, 251, 0), (134, 0, 142, 0), (70, 202, 0, 0), (125, 231, 99, 0), (88, 115, 43, 0), (144, 212, 50, 0), (161, 83, 52 ,0), (152, 148, 0 ,0), (131, 84, 84, 0), (117, 74, 26, 0), (171, 174, 119, 0)
 ]
 MATERIALS = [
-    "sky", "cloud", "fog", "water", "hill", "mountain", "mud", "snow", "straw", "sea", "river", "flower", "bush", "grass", "forest", "dirt", "gravel", "sand", "stone", "stonewall"
+    "Sky", "Cloud", "Hill", "Mountain", "Water", "Mud", "Fog", "Snow", "Sea", "River", "Flower", "Grass", "Straw", "Bush", "Forest", "Stone", "Sand", "Gravel", "Dirt", "Stone Wall"
 ]
-def distance(rbgba):
+# def distance(rbgba):
 
 
 # (1635, 170) (1700, 170) (1760, 170) (1825, 170) (1890, 170)
