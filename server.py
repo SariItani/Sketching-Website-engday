@@ -4,8 +4,8 @@ from flask import Flask, jsonify, render_template, request
 import pyautogui
 from PIL import Image
 
-def getMousePosition():
-    return pyautogui.position()
+# def getMousePosition():
+#     return pyautogui.position()
 
 app = Flask(__name__)
 
