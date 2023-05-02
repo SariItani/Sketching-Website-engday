@@ -4,8 +4,11 @@ from flask import Flask, jsonify, render_template, request
 import pyautogui
 from PIL import Image
 
-# def getMousePosition():
-#     return pyautogui.position()
+
+# def color_picker(color):
+#     return avg.
+
+
 COLORS = [
     (121, 231, 245, 0), (97, 126, 123, 0), (59, 222, 138, 0), (138, 122, 92, 0), (172, 194, 254, 0), (147, 53, 13, 0), (74, 198, 178, 0), (135, 216, 255, 0), (131, 206, 207, 0), (141, 171, 251, 0), (134, 0, 142, 0), (70, 202, 0, 0), (125, 231, 99, 0), (88, 115, 43, 0), (144, 212, 50, 0), (161, 83, 52 ,0), (152, 148, 0 ,0), (131, 84, 84, 0), (117, 74, 26, 0), (171, 174, 119, 0)
 ]
@@ -25,7 +28,6 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-colors = []
 @app.route('/upload-canvas', methods=['POST'])
 def upload_canvas():
     dataURL = request.json['dataURL']
@@ -36,6 +38,7 @@ def upload_canvas():
         f.write(image_data)
 
     # Get the color of each pixel in the image
+    colors = []
     image = Image.open('image.png')
     pixels = image.load()
     for y in range(image.size[1]):
@@ -54,12 +57,6 @@ def upload_canvas():
     output_buffer = BytesIO()
     new_image.save(output_buffer, format='PNG')
     image_data = output_buffer.getvalue()
-
-    # # debugging
-    # file_content = str(colors)
-    # file = open("pixels.txt", "w")
-    # file.write(file_content)
-    # file.close()
 
     return jsonify({'message': 'Image uploaded successfully!'})
 
