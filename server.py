@@ -58,17 +58,6 @@ def upload_canvas():
         for x in range(image.size[0]):
             color = pixels[x, y]
             colors.append(color)
-    for i in range(len(colors) - 1):
-        colors[i] = color_picker(colors[i])
-    # now i have the array of fixed colors
-
-    # code
-    # ...
-    for i, color in enumerate(colors):
-        x = (i % canvas_width) + canvas_top_left[0]
-        y = (i // canvas_width) + canvas_top_left[1]
-        pyautogui.click(*pixel_to_pos(color))
-        pyautogui.click(x, y)
 
     # Get the size of the image
     width, height = image.size
@@ -81,6 +70,18 @@ def upload_canvas():
     output_buffer = BytesIO()
     new_image.save(output_buffer, format='PNG')
     image_data = output_buffer.getvalue()
+
+    for i in range(len(colors) - 1):
+        colors[i] = color_picker(colors[i])
+    # now i have the array of fixed colors
+
+    # code
+    # ...
+    for i, color in enumerate(colors):
+        x = (i % canvas_width) + canvas_top_left[0]
+        y = (i // canvas_width) + canvas_top_left[1]
+        pyautogui.click(pixel_to_pos(color)[0], pixel_to_pos(color)[1])
+        pyautogui.click(x, y)
 
     return jsonify({'message': 'Image uploaded successfully!'})
 

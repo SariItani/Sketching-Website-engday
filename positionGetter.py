@@ -22,7 +22,7 @@ pixel_to_pos = {}
 for i, color in enumerate(VALUES):
     # color (rbga) at index i will point to position (x, y) at position i
     pixel_to_pos[color] = MATERIALS[i]
-
+print(*pixel_to_pos(color))
 # if i give a function an RBGA tuple (r, g, b, a), 
 # it will iterate over VALUES by i:
 # find di = sqrt( sum ( ( tulpe[component] - VALUE[i][component] ) **2 ) )
