@@ -162,9 +162,24 @@
 
 
   function download() {
-    console.log("Download button clicked!");
-    var link = document.createElement("a");
-    var dataURL = canvas.toDataURL();
+    // console.log("Download button clicked!");
+    // var link = document.createElement("a");
+    // var dataURL = canvas.toDataURL();
+    var canvas = document.getElementById('can');
+    var submitBtn = document.getElementById('download');
+
+    submitBtn.addEventListener('click', () => {
+        var dataURL = canvas.toDataURL('image/png');
+
+        fetch('/upload-canvas', {
+            method: 'POST',
+            body: JSON.stringify({dataURL}),
+            headers: {'Content-Type': 'application/json'}
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
+    });
   //  link.href = dataURL;
   //  link.download = "mydrawing.png";
   //  document.body.appendChild(link);
