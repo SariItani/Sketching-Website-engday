@@ -3,10 +3,7 @@ from io import BytesIO
 from flask import Flask, jsonify, render_template, request
 import pyautogui
 from PIL import Image
-
-
-# def color_picker(color):
-#     return avg.
+from math import sqrt
 
 
 COLORS = [
@@ -19,7 +16,22 @@ pixel_to_pos = {}
 for i, color in enumerate(COLORS):
     # color (rbga) at index i will point to position (x, y) at position i
     pixel_to_pos[color] = MATERIALS[i]
-# print(pixel_to_pos)
+
+def color_picker(color:tuple):
+    distances = []
+    for i in range(len(COLORS) - 1):
+        sum = 0
+        for component in range(len(color) - 1):
+            sum += (color[component] - COLORS[i][component])**2
+        distances.append(sqrt(sum))
+    # now that i have the distances i have to pick the index of the minimum element
+    min_distance = min(distances)
+    min_index = distances.index(min_distance)
+    return COLORS[min_index]
+
+input  = (131, 156, 138, 3)
+print(color_picker(input))
+print(pixel_to_pos[color_picker(input)])
 
 
 app = Flask(__name__)

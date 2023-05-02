@@ -1,5 +1,6 @@
 from time import sleep
 import pyautogui
+from math import sqrt
 
 screenWidth, screenHeight = pyautogui.size() # Get the size of the primary monitor.
 # print(screenWidth, screenHeight)
@@ -17,11 +18,32 @@ VALUES = [
 MATERIALS = [
     "Sky", "Cloud", "Hill", "Mountain", "Water", "Mud", "Fog", "Snow", "Sea", "River", "Flower", "Grass", "Straw", "Bush", "Forest", "Stone", "Sand", "Gravel", "Dirt", "Stone Wall"
 ]
-
+pixel_to_pos = {}
+for i, color in enumerate(VALUES):
+    # color (rbga) at index i will point to position (x, y) at position i
+    pixel_to_pos[color] = MATERIALS[i]
 
 # if i give a function an RBGA tuple (r, g, b, a), 
 # it will iterate over VALUES by i:
 # find di = sqrt( sum ( ( tulpe[component] - VALUE[i][component] ) **2 ) )
+# we add di to a list of distances by index i
+# we get the shortest distance's index: i represents the the index of the correct VALUES color
+# we return VALUES[i]
+def color_picker(color:tuple):
+    distances = []
+    for i in range(len(VALUES) - 1):
+        sum = 0
+        for component in range(len(color) - 1):
+            sum += (color[component] - VALUES[i][component])**2
+        distances.append(sqrt(sum))
+    # now that i have the distances i have to pick the index of the minimum element
+    min_distance = min(distances)
+    min_index = distances.index(min_distance)
+    return VALUES[min_index]
+
+input  = (131, 156, 138, 3)
+print(color_picker(input))
+print(pixel_to_pos[color_picker(input)])
 
 
 # (1635, 170) (1700, 170) (1760, 170) (1825, 170) (1890, 170)
