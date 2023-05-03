@@ -134,6 +134,7 @@
   }
 
   function color(event) {
+    ctx.globalCompositeOperation = 'source-over'
     if (!event) {
       x = "rgb(121,231,245)"
     }
@@ -263,7 +264,8 @@
         </div>
       </div>
       <div>Eraser</div>
-      <div class="select-colour" style="background: white; border: 2px solid" id="white"></div>
+      <div class="select-colour" onclick="ctx.globalCompositeOperation = 'destination-out'; x='white'"
+        style="background: white; border: 2px solid" id="white"></div>
       <div class="buttons">
         <input type="button" class="btn btn-primary" value="Submit" id="download" size="23" onclick="download()"
           class="" />
